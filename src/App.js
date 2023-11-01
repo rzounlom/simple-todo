@@ -1,3 +1,5 @@
+import "./App.css";
+
 import React, { useState } from "react";
 
 import TodoList from "./components/todo-list/TodoList";
@@ -43,11 +45,12 @@ function App() {
 
   // Render the Todo app
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h1>Todo App</h1>
-      <div style={{ display: "flex", marginBottom: "20px" }}>
+    <div className="App">
+      <h1 style={{ textAlign: "center" }}>Todo App</h1>
+      <div className="todo-header">
         {/* Input field for new todo names */}
         <input
+          className="add-todo"
           type="text"
           placeholder="Add a new todo..."
           value={todoName}
@@ -56,14 +59,14 @@ function App() {
         />
         {/* Input field for confidence level */}
         <input
+          className="todo-confidence"
           type="number"
           min="1"
           max="5"
           value={confidence}
           onChange={(e) => setConfidence(e.target.value)}
-          style={{ width: "50px", marginRight: "10px" }}
         />
-        <button onClick={addTodo}>Add Todo</button>
+        <button onClick={addTodo}>Submit</button>
       </div>
       {/* Component to render the list of todos */}
       <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
