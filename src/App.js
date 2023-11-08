@@ -86,7 +86,7 @@ function App() {
   const fetchTodos = async () => {
     setIsLoading(true); //setting the isLoading state to true
     const todos = await todoService.getTodos(); //calling the getTodos function from the todoService module
-    console.log("todos:", todos);
+    // console.log("todos:", todos);
 
     setTodos(todos); //updating the todos state with the todos array returned from the API
     setIsLoading(false); //setting the isLoading state to false
