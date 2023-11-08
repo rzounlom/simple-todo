@@ -1,41 +1,36 @@
 import "./Todo.css";
 
-import { useEffect } from "react";
-
 // Component to render a single todo
 const Todo = ({
   id,
   name,
   completed,
   confidence,
-  removeTodo,
-  toggleTodo,
+  deleteTodo,
+  updateTodo,
   // setModalOpen,
 }) => {
   //destructuring id, name, completed, confidence, removeTodo, and toggleTodo from props
-  // useEffect(() => {}, [completed]);
   return (
     <li>
       {/* Checkbox to mark a todo as completed */}
       <input
         type="checkbox"
-        checked={completed}
-        onChange={() => toggleTodo(id, completed)}
+        checked={completed} //setting the checked attribute to the completed value
+        onChange={() => updateTodo(id, completed)}
       />
       {/* Display the todo name and confidence level */}
       <span
         style={{
+          //styling the todo name based on whether it is completed or not
           textDecoration: completed ? "line-through" : "none",
         }}
       >
         {name} (Confidence: {confidence})
       </span>
 
-      {/* <button className="edit" onClick={() => setModalOpen(true)}>
-        Edit
-      </button> */}
       {/* Button to remove a todo */}
-      <button className="remove" onClick={() => removeTodo(id)}>
+      <button className="remove" onClick={() => deleteTodo(id)}>
         Remove
       </button>
     </li>

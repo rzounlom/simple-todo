@@ -4,8 +4,8 @@ import { RotatingLines } from "react-loader-spinner";
 import Todo from "../todo/Todo";
 
 // Component to render the list of todos
-const TodoList = ({ todos, removeTodo, toggleTodo, loading }) => {
-  //destructuring todos, removeTodo, and toggleTodo from props
+const TodoList = ({ todos, deleteTodo, updateTodo, loading }) => {
+  //destructuring todos, deleteTodo, and updateTodo from props
 
   // If loading is true, render the RotatingLines spinner
   if (loading) {
@@ -33,8 +33,8 @@ const TodoList = ({ todos, removeTodo, toggleTodo, loading }) => {
               <Todo
                 key={todo.id} //setting the key prop to the id of the todo object
                 {...todo} //spreading the todo object as props to the Todo component
-                removeTodo={removeTodo} //passing down the removeTodo function as a prop
-                toggleTodo={toggleTodo} //passing down the toggleTodo function as a prop
+                deleteTodo={deleteTodo} //passing down the deleteTodo function as a prop
+                updateTodo={updateTodo} //passing down the updateTodo function as a prop
               />
             )
           )
