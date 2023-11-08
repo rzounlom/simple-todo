@@ -31,6 +31,8 @@ function App() {
 
       const createdTodo = await todoService.createTodo(newTodo); //calling the createTodo function from the todoService module
 
+      //check if the todo was successfully created
+
       if (createdTodo) {
         await fetchTodos(); //calling the fetchTodos function to update the todos state with the new todo
         toast.success("Todo created successfully");
@@ -48,8 +50,26 @@ function App() {
   };
 
   // Function to remove a todo by id
+  const toggleTodo = async (id, completed) => {
+    const updatedTodo = await todoService.updateTodo(id, {
+      completed: !completed,
+    }); //calling the deleteTodoById function from the todoService module
+    console.log("updatedTodo:", updatedTodo);
+    if (updatedTodo) {
+      //if the todo was successfully deleted
+      setIsLoading(true); //setting the isLoading state to true
+      await fetchTodos(); //calling the fetchTodos function to update the todos state with the new todo
+      setIsLoading(false); //setting the isLoading state to false
+      // toast.success("Todo updated successfully");
+    } else {
+      setIsLoading(false); //setting the isLoading state to false
+      toast.error("Error updating todo");
+    }
+  };
+
+  // Function to remove a todo by id
   const removeTodo = async (id) => {
-    const deletedTodo = todoService.deleteTodo(id); //calling the deleteTodoById function from the todoService module
+    const deletedTodo = await todoService.deleteTodo(id); //calling the deleteTodoById function from the todoService module
     if (deletedTodo) {
       //if the todo was successfully deleted
       setIsLoading(true); //setting the isLoading state to true
@@ -62,20 +82,12 @@ function App() {
     }
   };
 
-  // Function to toggle the 'completed' state of a todo
-  const toggleTodo = (id) => {
-    const newTodos = todos.map(
-      (todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo //mapping over current todos and updating the completed property of the todo that matches the id
-    );
-    setTodos(newTodos); //updating the todos state with the newTodos array
-  };
-
   // Function to fetch todos from the API
   const fetchTodos = async () => {
     setIsLoading(true); //setting the isLoading state to true
     const todos = await todoService.getTodos(); //calling the getTodos function from the todoService module
-    // console.log("todos:", todos);
+    console.log("todos:", todos);
+
     setTodos(todos); //updating the todos state with the todos array returned from the API
     setIsLoading(false); //setting the isLoading state to false
   };
@@ -89,6 +101,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer position="top-center" />
+
       <h1 style={{ textAlign: "center" }}>Todo App</h1>
       <div className="todo-header">
         {/* Input field for new todo names */}

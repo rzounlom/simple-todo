@@ -1,5 +1,7 @@
 import "./Todo.css";
 
+import { useEffect } from "react";
+
 // Component to render a single todo
 const Todo = ({
   id,
@@ -8,16 +10,17 @@ const Todo = ({
   confidence,
   removeTodo,
   toggleTodo,
-  setModalOpen,
+  // setModalOpen,
 }) => {
   //destructuring id, name, completed, confidence, removeTodo, and toggleTodo from props
+  // useEffect(() => {}, [completed]);
   return (
     <li>
       {/* Checkbox to mark a todo as completed */}
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => toggleTodo(id)}
+        onChange={() => toggleTodo(id, completed)}
       />
       {/* Display the todo name and confidence level */}
       <span
@@ -28,9 +31,9 @@ const Todo = ({
         {name} (Confidence: {confidence})
       </span>
 
-      <button className="edit" onClick={() => setModalOpen(true)}>
+      {/* <button className="edit" onClick={() => setModalOpen(true)}>
         Edit
-      </button>
+      </button> */}
       {/* Button to remove a todo */}
       <button className="remove" onClick={() => removeTodo(id)}>
         Remove
