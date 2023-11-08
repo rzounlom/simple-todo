@@ -1,7 +1,15 @@
 import "./Todo.css";
 
 // Component to render a single todo
-const Todo = ({ id, name, completed, confidence, removeTodo, toggleTodo }) => {
+const Todo = ({
+  id,
+  name,
+  completed,
+  confidence,
+  removeTodo,
+  toggleTodo,
+  setModalOpen,
+}) => {
   //destructuring id, name, completed, confidence, removeTodo, and toggleTodo from props
   return (
     <li>
@@ -19,8 +27,14 @@ const Todo = ({ id, name, completed, confidence, removeTodo, toggleTodo }) => {
       >
         {name} (Confidence: {confidence})
       </span>
+
+      <button className="edit" onClick={() => setModalOpen(true)}>
+        Edit
+      </button>
       {/* Button to remove a todo */}
-      <button onClick={() => removeTodo(id)}>Remove</button>
+      <button className="remove" onClick={() => removeTodo(id)}>
+        Remove
+      </button>
     </li>
   );
 };
